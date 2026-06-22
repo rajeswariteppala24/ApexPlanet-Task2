@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Productivity Hub</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+    padding:20px;
+}
+
+h1{
+    text-align:center;
+    color:#2563eb;
+    margin-bottom:20px;
+}
+
+#clock{
+    text-align:center;
+    margin-bottom:20px;
+    font-size:20px;
+    color:#333;
+}
+
+.container{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    width:400px;
+}
+
+input,textarea{
+    width:100%;
+    padding:10px;
+    margin:8px 0;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+button{
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1d4ed8;
+}
+
+ul{
+    margin-top:10px;
+    padding-left:20px;
+}
+
+#taskList{
+    list-style:none;
+    padding:0;
+}
+
+#taskList li{
+    background:#dbeafe;
+    margin-top:8px;
+    padding:10px;
+    border-radius:5px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.delete{
+    background:red;
+}
+
+#error{
+    color:red;
+    margin-top:10px;
+}
+
+@media(max-width:850px){
+    .container{
+        flex-direction:column;
+        align-items:center;
+    }
+
+    .card{
+        width:100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<h1>🚀 Student Productivity Hub</h1>
+
+<h3 id="clock"></h3>
+
+<div class="container">
+
+<div class="card">
+    <h2>📧 Contact Form</h2>
+
+    <form onsubmit="return validateForm()">
+
+        <input type="text" id="name" placeholder="Enter Name">
+
+        <input type="email" id="email" placeholder="Enter Email">
+
+        <textarea id="message" rows="4"
+        placeholder="Enter Message"></textarea>
+
+        <button type="submit">Submit</button>
+
+    </form>
+
+    <p id="error"></p>
+</div>
+
+<div class="card">
+    <h2>💻 Skills</h2>
+
+    <ul>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+    </ul>
+</div>
+
+<div class="card">
+    <h2>📝 To-Do List</h2>
+
+    <input type="text"
+    id="task"
+    placeholder="Enter Task">
+
+    <button onclick="addTask()">Add Task</button>
+
+    <ul id="taskList"></ul>
+</div>
+
+</div>
+
+<script>
+
+function validateForm(){
+
+let name=document.getElementById("name").value;
+let email=document.getElementById("email").value;
+let message=document.getElementById("message").value;
+
+let pattern=/^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+if(name=="" || email=="" || message==""){
+document.getElementById("error").innerHTML=
+"Please fill all fields";
+return false;
+}
+
+if(!email.match(pattern)){
+document.getElementById("error").innerHTML=
+"Enter a valid email";
+return false;
+}
+
+alert("Form Submitted Successfully!");
+return true;
+}
+
+function addTask(){
+
+let task=document.getElementById("task").value;
+
+if(task==""){
+alert("Enter a task");
+return;
+}
+
+let li=document.createElement("li");
+
+li.innerHTML =
+task +
+' <button class="delete" onclick="this.parentElement.remove()">Delete</button>';
+
+document.getElementById("taskList").appendChild(li);
+
+document.getElementById("task").value="";
+}
+
+function updateClock(){
+document.getElementById("clock").innerHTML =
+"🕒 " + new Date().toLocaleString();
+}
+
+setInterval(updateClock,1000);
+
+</script>
+
+</body>
+</html>
