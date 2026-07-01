@@ -34,8 +34,6 @@ The project demonstrates intermediate web development concepts using **HTML, CSS
 ```
 ApexPlanet-Task2
 │── index.html
-│── style.css
-└── script.js
 ```
 
 ---
